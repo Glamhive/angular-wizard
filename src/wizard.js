@@ -23,7 +23,9 @@ angular.module('mgo-angular-wizard').directive('wizard', function() {
             WizardHandler.addWizard($scope.name || WizardHandler.defaultName, this);
 
             $scope.$on('$destroy', function() {
-                WizardHandler.removeWizard($scope.name || WizardHandler.defaultName);
+              /// Glamhive CLT : Prevent Wizard from being destroyed when scope is destroyed
+              /// due to the issues with Login redirect reload creating multiple controllers
+              //WizardHandler.removeWizard($scope.name || WizardHandler.defaultName);
             });
 
             //steps array where all the scopes of each step are added
@@ -183,7 +185,7 @@ angular.module('mgo-angular-wizard').directive('wizard', function() {
                     //invoking goTo() with step number next in line
                     $scope.goTo($scope.steps[index + 1]);
                 }
-                
+
             };
 
             //used to traverse to any step, step number placed as argument
